@@ -1,0 +1,5 @@
+<h2>Edit Kitten Profile</h2>
+
+<%=render 'kittens/form'%>
+
+<p><%=link_to 'delete', @kitten, method: :delete, data: {confirm: "You sure?"}%></p>

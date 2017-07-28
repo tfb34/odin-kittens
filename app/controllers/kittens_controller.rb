@@ -20,6 +20,7 @@ class KittensController < ApplicationController
 	end
 
 	def edit
+		@kitten = Kitten.find_by(id: params[:id])
 
 	end
 
@@ -28,11 +29,21 @@ class KittensController < ApplicationController
 	end
 
 	def update
+		@kitten = Kitten.find_by(id: params[:id])
+        if @kitten.update_attributes(kitten_params)
+        	flash[:success] = "Successfully updated kitten's profile."
+       		redirect_to @kitten
+        else
+        	flash.now[:warning] = "An error has occurred."
+        	render 'edit'
+        end
 
 	end
 
 	def destroy
-		byebug
+		Kitten.find_by(id: params[:id]).destroy
+		flash[:success] = "Kitten profile deleted."
+		redirect_to kittens_url
 	end
 
 	private 

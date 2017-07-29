@@ -1,6 +1,10 @@
 class KittensController < ApplicationController
 	def index
 		@kittens = Kitten.all
+		respond_to do |format|
+			format.html 
+			format.json {render :json => @kittens.to_json}
+		end
 	end
 
 	def create
@@ -26,6 +30,10 @@ class KittensController < ApplicationController
 
 	def show
 		@kitten = Kitten.find_by(id: params[:id])
+		respond_to do |format|
+			format.html
+			format.json {render :json => @kitten.to_json}
+		end
 	end
 
 	def update
